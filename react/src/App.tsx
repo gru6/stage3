@@ -1,32 +1,29 @@
 import "./App.css";
 import React from "react";
-/* import ReactDOM from "react-dom/client"; */
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 
-import Home from "./routes/root";
+import Home from "./pages/Homepage";
 import ErrorPage from "./pages/Errorpage";
 import About from "./pages/Aboutpage";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "about",
-    element: <About />,
-  },
-]);
-
-/* ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-); */
-
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <header className="header">
+        <NavLink to={`/`}>Home</NavLink>
+        <NavLink to={`/about`}>About Us</NavLink>
+      </header>
+      <Routes>
+        <Route path="/" element={<Home />} errorElement={<ErrorPage />}></Route>
+        <Route
+          path="/about"
+          element={<About />}
+          errorElement={<ErrorPage />}
+        ></Route>
+        <Route path="*" element={<ErrorPage />}></Route>
+      </Routes>
+    </>
+  );
 }
 
 export default App;

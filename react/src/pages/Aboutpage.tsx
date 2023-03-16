@@ -3,7 +3,8 @@ import React from "react";
 export default function About() {
   return (
     <>
-      <header className="header">
+      <h1>About us</h1>
+      {/*     <header className="header">
         <h1>About us</h1>
         <nav>
           <ul>
@@ -12,7 +13,7 @@ export default function About() {
             </li>
           </ul>
         </nav>
-      </header>
+      </header> */}
     </>
   );
 }
