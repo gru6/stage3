@@ -1,19 +1,16 @@
-export default function Root() {
+export default function Home() {
   return (
     <>
-      <div id="sidebar">
-        <h1>React Router Contacts</h1>
+      <header className="header">
+        <h1>Home</h1>
         <nav>
           <ul>
-            <li>
-              <a href={`/home`}>Home</a>
-            </li>
             <li>
               <a href={`/about`}>About Us</a>
             </li>
           </ul>
         </nav>
-      </div>
+      </header>
       <div id="detail"></div>
     </>
   );
