@@ -13,13 +13,10 @@ function App() {
         <NavLink to={`/`}>Home</NavLink>
         <NavLink to={`/about`}>About Us</NavLink>
       </header>
+
       <Routes>
-        <Route path="/" element={<Home />} errorElement={<ErrorPage />}></Route>
-        <Route
-          path="/about"
-          element={<About />}
-          errorElement={<ErrorPage />}
-        ></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/about" element={<About />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
     </>
