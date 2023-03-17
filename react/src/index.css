@@ -8,7 +8,6 @@ body {
   place-items: center;
   min-height: 100vh;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
 
 }
@@ -73,6 +72,18 @@ button:focus-visible {
   justify-content:  center; 
   align-content: center;
   padding: 20px;
+}
+.movie-card{
+  border: solid #196b82;
+  border-radius: 10px;
+  background-color: rgb(147, 183, 203);
+  padding: 10px;
+}
+
+.movie-details > img {
+  width: 200px;
+  height: 300px;
+  margin-top: 10px;
 }
 
 

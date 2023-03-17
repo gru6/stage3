@@ -12,6 +12,7 @@ export const movies: Movie[] = [
     language: "English",
     subtitles: ["English", "Spanish", "French"],
     country: "USA",
+    imageUrl: "/godfather.webp",
   },
   {
     title: "The Shawshank Redemption",
@@ -24,6 +25,7 @@ export const movies: Movie[] = [
     language: "English",
     subtitles: ["English", "Spanish", "French"],
     country: "USA",
+    imageUrl: "/shoushenk.webp",
   },
   {
     title: "The Dark Knight",
@@ -36,6 +38,7 @@ export const movies: Movie[] = [
     language: "English",
     subtitles: ["English", "Spanish", "French"],
     country: "USA",
+    imageUrl: "/dark-knight.webp",
   },
   {
     title: "Pulp Fiction",
@@ -48,6 +51,7 @@ export const movies: Movie[] = [
     language: "English",
     subtitles: ["English", "Spanish", "French"],
     country: "USA",
+    imageUrl: "/pulp-fiction.webp",
   },
   {
     title: "Forrest Gump",
@@ -60,6 +64,7 @@ export const movies: Movie[] = [
     language: "English",
     subtitles: ["English", "Spanish", "French"],
     country: "USA",
+    imageUrl: "/forest-gump.webp",
   },
   {
     title: "The Matrix",
@@ -72,6 +77,7 @@ export const movies: Movie[] = [
     language: "English",
     subtitles: ["English", "Spanish", "French"],
     country: "USA",
+    imageUrl: "/matrix.webp",
   },
   {
     title: "The Silence of the Lambs",
@@ -84,5 +90,6 @@ export const movies: Movie[] = [
     language: "English",
     subtitles: ["English", "Spanish", "French"],
     country: "USA",
+    imageUrl: "/silence.webp",
   },
 ];

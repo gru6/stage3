@@ -9,6 +9,7 @@ export interface Movie {
   language: string;
   subtitles: string[];
   country: string;
+  imageUrl: string;
 }
 
 export interface Props {

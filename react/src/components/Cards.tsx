@@ -4,11 +4,12 @@ import { movies } from "./cinemadata";
 
 export class MovieCard extends React.Component<Props> {
   render() {
-    const { title, director, year, actors, rating } = this.props.movie;
+    const { title, director, year, actors, rating, imageUrl } =
+      this.props.movie;
     return (
       <div className="movie-card">
-        {/*     <img src={imageUrl} alt={title} /> */}
         <div className="movie-details">
+          <img src={imageUrl} alt={title} />
           <h2>{title}</h2>
           <p>Directed by {director}</p>
           <p>Year {year}</p>
