@@ -40,6 +40,10 @@ h1 {
   line-height: 1.1;
 }
 
+#search-form{
+  margin-bottom: 10px;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -81,6 +85,6 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #d2d2d2;
   }
 } 
