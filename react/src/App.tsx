@@ -6,7 +6,7 @@ import Home from "./pages/Homepage";
 import ErrorPage from "./pages/Errorpage";
 import About from "./pages/Aboutpage";
 
-class App extends React.Component {
+export class App extends React.Component {
   render() {
     return (
       <>
@@ -39,5 +39,3 @@ class App extends React.Component {
       );
   }
 }
-
-export default App;

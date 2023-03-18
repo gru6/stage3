@@ -11,10 +11,10 @@ export default class SearchBar extends React.Component<
   constructor(props: Record<string, never>) {
     super(props);
     this.state = { InputValue: "" };
-    this.handleChangeInput = this.handleChangeInput.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleChangeInput(event: ChangeEvent<HTMLInputElement>) {
+  handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     this.setState({ InputValue: event.target.value });
   }
 
@@ -37,7 +37,7 @@ export default class SearchBar extends React.Component<
             <input
               defaultValue={this.state.InputValue}
               type="text"
-              onChange={this.handleChangeInput}
+              onChange={this.handleInputChange}
             />
           </div>
         </form>
