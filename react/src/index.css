@@ -15,6 +15,7 @@ header {
   background-color: rgb(147, 183, 203);
   padding: 2rem 0;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 a {
@@ -35,6 +36,7 @@ opacity: 1;
 }
 
 h1 {
+  margin-left: 30px;
   font-size: 3.2em;
   line-height: 1.1;
 }

@@ -13,7 +13,7 @@ export class MovieCard extends React.Component<Props> {
           <h2>{title}</h2>
           <p>Directed by {director}</p>
           <p>Year {year}</p>
-          <p>Actors: {actors}</p>
+          <p>Actors: {actors.join(", ")}</p>
           <p>Rating: {rating}</p>
         </div>
       </div>
