@@ -6,7 +6,7 @@ interface LocationComponentProps {
 type Props = LocationComponentProps & WithRouterProps;
 const LocationComponent: React.FC<Props> = () => {
   switch (location.pathname) {
-    case "/home":
+    case "/":
       return <h1>Current page: Home</h1>;
     case "/about":
       return <h1>Current page: About us</h1>;

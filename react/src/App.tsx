@@ -11,31 +11,17 @@ export class App extends React.Component {
     return (
       <>
         <header className="header">
-          <NavLink to={`/home`}>Home</NavLink>
+          <NavLink to={`/`}>Home</NavLink>
           <NavLink to={`/about`}>About Us</NavLink>
           <RouterLocation />
         </header>
 
         <Routes>
-          <Route path="/home" element={<Home />}></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
       </>
     );
-  }
-  Locations() {
-    if (window.location.href.slice(-6) === "/about") {
-      return (
-        <>
-          <h1>Current page: About us {location.pathname}</h1>
-        </>
-      );
-    } else
-      return (
-        <>
-          <h1>Current page: Home</h1>
-        </>
-      );
   }
 }
