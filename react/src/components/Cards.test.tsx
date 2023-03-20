@@ -8,12 +8,11 @@ import "@testing-library/jest-dom/extend-expect";
 
 describe("MovieCard component", () => {
   const movie = movies[0];
-  console.log("movie :>> ", movie);
   it("should render the movie card with correct details", () => {
     render(<MovieCard movie={movie} />);
 
-    expect(screen.getByAltText(/The Godfather/i)).toBeInTheDocument();
-    expect(screen.getByText(/The Godfather/i)).toBeInTheDocument();
+    expect(screen.getByAltText(`${movie.title}`)).toBeInTheDocument();
+    expect(screen.getByText(`${movie.title}`)).toBeInTheDocument();
     expect(
       screen.getByText(`Directed by ${movie.director}`)
     ).toBeInTheDocument();

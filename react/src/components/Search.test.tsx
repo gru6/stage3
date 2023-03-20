@@ -19,24 +19,4 @@ describe("SearchBar component", () => {
     fireEvent.change(inputField, { target: { value: "test input" } });
     expect(inputField).toHaveValue("test input");
   });
-
-  /* it("saves input field value to local storage when component unmounts", () => {
-    const setItemSpy = jest.spyOn(localStorage, "setItem");
-    render(<SearchBar />);
-    const inputField = screen.getByRole("textbox");
-    fireEvent.change(inputField, { target: { value: "test input" } });
-    expect(setItemSpy).not.toHaveBeenCalled();
-    jest.runOnlyPendingTimers();
-    expect(setItemSpy).toHaveBeenCalledWith("input", "test input");
-  });
-
-  it("loads input field value from local storage when component mounts", () => {
-    const getItemSpy = jest.spyOn(localStorage, "getItem");
-    getItemSpy.mockReturnValueOnce(JSON.stringify("test input"));
-    render(<SearchBar />);
-    const inputField = screen.getByRole("textbox");
-    expect(inputField).toHaveValue("test input");
-    expect(getItemSpy).toHaveBeenCalledWith("input");
-    getItemSpy.mockRestore();
-  }); */
 });
