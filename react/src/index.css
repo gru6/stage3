@@ -29,19 +29,25 @@ header {
 
 a {
   font-weight: 500;
-  color: #242424;
+  color: #213547;
   text-decoration: inherit;
   margin-left: 30px;
   padding: 10px;
 }
 
 a:hover {
-opacity: 1;
-color: #747bff;
+color: #646cff;
 }
 
+a:focus {
+  color: #a74848;
+}
+a:active {
+  color: #c04141;
+  }
+
 .active {
-  color: #196b82;
+  color: #c04141;
   cursor: default;
 }
 
