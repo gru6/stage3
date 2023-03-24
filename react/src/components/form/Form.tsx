@@ -1,0 +1,113 @@
+import React, { Component, FormEvent, RefObject } from "react";
+import Modal from "./Modal";
+
+export interface InewCard {
+  text: string | undefined;
+  date: string | undefined;
+  file?: string | undefined;
+}
+
+const dataForCards: InewCard[] = [];
+
+export class NameForm extends Component<Record<string, never>, InewCard> {
+  private textInput: RefObject<HTMLInputElement> = React.createRef();
+  private dateInput: RefObject<HTMLInputElement> = React.createRef();
+  private fileInput: RefObject<HTMLInputElement> = React.createRef();
+
+  constructor(props: Record<string, never>) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.state = { text: "1", date: "1", file: "1" };
+    this.textInput = React.createRef();
+    this.dateInput = React.createRef();
+    this.fileInput = React.createRef();
+  }
+  /*   validate() {
+    dataForCards.push(this.state);
+  } */
+
+  handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    dataForCards.push(this.state);
+    this.setState({
+      text: this.textInput.current?.value,
+      date: this.dateInput.current?.value,
+      file: this.fileInput.current?.files
+        ? URL.createObjectURL(this.fileInput.current.files[0])
+        : "",
+    });
+  }
+
+  createMessage() {
+    return <div className="created-message">Карта создана</div>;
+  }
+  /*   createNewCarD() {
+    <div>
+      {dataForCards.map((card) => (
+        <NewCard key={card.text} movie={card} />
+      ))}
+    </div>;
+  } */
+
+  render(): JSX.Element {
+    console.log("this.state :>> ", this.state);
+    console.log("before dataForCards :>> ", dataForCards);
+    return (
+      <>
+        <form className="form-container" onSubmit={this.handleSubmit}>
+          <label>
+            Text:
+            <input
+              type="text"
+              ref={this.textInput}
+              /*  defaultValue="Bob Marchinsky" */
+              required
+              pattern="[a-zA-Z]+"
+              title="Имя должно содержать буквы"
+            />
+          </label>
+          <label>
+            Date:
+            <input type="date" ref={this.dateInput} required />
+          </label>
+          <label>
+            Upload image:
+            <input
+              type="file"
+              ref={this.fileInput}
+              required
+              id="imageFile"
+              accept="image/*"
+            />
+          </label>
+          <button>Submit</button>
+        </form>
+        <Modal />
+        {this.createMessage()}
+        {dataForCards.length > 0 && (
+          <div>
+            {dataForCards
+              .map((card, index) => (
+                <div key={index}>
+                  <div>{card.text}</div>
+                  <div>{card.date}</div>
+                  <img src={card.file} alt="" className="new-card-img" />
+                </div>
+              ))
+              .slice(1)}
+          </div>
+          //TODO первый отрисовывается пустой
+        )}
+      </>
+    );
+  }
+}
+
+/* text input
+date input
+dropdown/select
+checkbox
+switcher (radio)
+file upload (image)
+ */

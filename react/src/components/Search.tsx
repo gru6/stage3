@@ -1,4 +1,6 @@
 import React, { ChangeEvent } from "react";
+import { NameForm } from "./form/Form";
+import { TestForm } from "./form/testForm";
 
 type SearchState = {
   InputValue: string;
@@ -42,6 +44,9 @@ export default class SearchBar extends React.Component<
           </div>
         </form>
         <button>Search</button>
+
+        <NameForm />
+        {/*    <TestForm /> */}
       </>
     );
   }
