@@ -39,6 +39,7 @@ export class Form extends Component<Props, Istate> {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
 
   handleOpenModal() {
@@ -70,6 +71,11 @@ export class Form extends Component<Props, Istate> {
     );
 
     this.handleOpenModal();
+    this.clearForm();
+  }
+
+  clearForm() {
+    this.form.current?.reset();
   }
 
   handleDataForCard(data: Icards) {
