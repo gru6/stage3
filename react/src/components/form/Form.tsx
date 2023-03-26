@@ -5,7 +5,7 @@ export interface InewCard {
   text: string | undefined;
   date: string | undefined;
   file?: string | undefined;
-  isModal?: boolean | undefined;
+  isModalOpen?: boolean | undefined;
 }
 
 const dataForCards: InewCard[] = [];
@@ -17,39 +17,61 @@ export class Form extends Component<Record<string, never>, InewCard> {
 
   constructor(props: Record<string, never>) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.state = { text: "1", date: "1", file: "1", isModal: false };
+    this.state = { text: "1", date: "1", file: "1", isModalOpen: false };
     this.textInput = React.createRef();
     this.dateInput = React.createRef();
     this.fileInput = React.createRef();
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
-  /*   validate() {
-    dataForCards.push(this.state);
-  } */
+
+  handleOpenModal() {
+    this.setState(
+      {
+        text: this.textInput.current?.value,
+        date: this.dateInput.current?.value,
+        file: this.fileInput.current?.files
+          ? URL.createObjectURL(this.fileInput.current.files[0])
+          : "",
+        isModalOpen: true,
+      },
+      () => dataForCards.push(this.state)
+    );
+  }
+
+  handleCloseModal() {
+    this.setState({ isModalOpen: false });
+  }
 
   handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    dataForCards.push(this.state);
-    this.setState({
-      text: this.textInput.current?.value,
-      date: this.dateInput.current?.value,
-      file: this.fileInput.current?.files
-        ? URL.createObjectURL(this.fileInput.current.files[0])
-        : "",
-      isModal: true,
-    });
+
+    this.handleOpenModal();
   }
 
-  /*   createNewCarD() {
-    <div>
-      {dataForCards.map((card) => (
-        <NewCard key={card.text} movie={card} />
-      ))}
-    </div>;
-  } */
+  createNewCard() {
+    return (
+      <>
+        <div>
+          {dataForCards
+            .map((card, index) => (
+              <div key={index}>
+                <div>{card.text}</div>
+                <div>{card.date}</div>
+                <img src={card.file} alt="" className="new-card-img" />
+              </div>
+            ))
+            .slice(1)}
+        </div>
+      </>
+    );
+  }
 
   render(): JSX.Element {
+    const { isModalOpen } = this.state;
     console.log("this.state :>> ", this.state);
     console.log("before dataForCards :>> ", dataForCards);
     return (
@@ -83,22 +105,8 @@ export class Form extends Component<Record<string, never>, InewCard> {
           <button>Submit</button>
         </form>
 
-        {this.state.isModal && <Modal />}
-
-        {dataForCards.length > 0 && (
-          <div>
-            {dataForCards
-              .map((card, index) => (
-                <div key={index}>
-                  <div>{card.text}</div>
-                  <div>{card.date}</div>
-                  <img src={card.file} alt="" className="new-card-img" />
-                </div>
-              ))
-              .slice(1)}
-          </div>
-          //TODO первый отрисовывается пустой
-        )}
+        <Modal isOpen={isModalOpen} onClose={this.handleCloseModal}></Modal>
+        {this.createNewCard()}
       </>
     );
   }

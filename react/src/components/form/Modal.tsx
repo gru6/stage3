@@ -1,44 +1,25 @@
-import React, { RefObject } from "react";
+import React from "react";
 
-type IModal = {
-  setModal: boolean;
-};
+interface ModalProps {
+  isOpen: boolean | undefined;
+  onClose: () => void;
+}
 
-export default class Modal extends React.Component<
-  Record<string, never>,
-  IModal
-> {
-  private closeRef: RefObject<HTMLDivElement> = React.createRef();
-  constructor(props: Record<string, never>) {
-    super(props);
-
-    this.closeRef = React.createRef();
-    this.state = { setModal: true };
-    this.onClose = this.onClose.bind(this);
-  }
-
-  onClose(): void {
-    this.setState({ setModal: false });
-  }
-
-  render(): JSX.Element {
+export default class Modal extends React.Component<ModalProps> {
+  render() {
+    const { isOpen, onClose } = this.props;
+    if (!isOpen) {
+      return null;
+    }
     return (
       <>
-        {this.state.setModal === true && (
-          <>
-            <div
-              ref={this.closeRef}
-              className="modal-bg"
-              onClick={() => this.onClose()}
-            ></div>
-            <div className="modal">
-              <div>Форма отправлена!</div>
-              <div className="close-modal" onClick={() => this.onClose()}>
-                <img src="/cross-close-svgrepo-com.svg" alt="" />
-              </div>
-            </div>
-          </>
-        )}
+        <div className="modal-bg" onClick={onClose}></div>
+        <div className="modal">
+          <div>Форма отправлена!</div>
+          <div className="close-modal" onClick={onClose}>
+            <img src="/cross-close-svgrepo-com.svg" alt="" />
+          </div>
+        </div>
       </>
     );
   }
