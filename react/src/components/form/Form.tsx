@@ -8,6 +8,7 @@ type Props = {
 export interface Icards {
   text: string | undefined;
   date: string | undefined;
+  sex?: string | undefined;
   file: string | undefined;
 }
 
@@ -21,6 +22,7 @@ export class Form extends Component<Props, Istate> {
   private textInput: RefObject<HTMLInputElement>;
   private dateInput: RefObject<HTMLInputElement>;
   private fileInput: RefObject<HTMLInputElement>;
+  private selectInput: RefObject<HTMLSelectElement>;
   private form: RefObject<HTMLFormElement>;
 
   constructor(props: Props) {
@@ -28,11 +30,13 @@ export class Form extends Component<Props, Istate> {
 
     this.state = {
       cards: [],
-      card: { text: "", date: "", file: "" },
+      card: { text: "", date: "", /* sex: "", */ file: "" },
       isModalOpen: false,
     };
+
     this.textInput = React.createRef();
     this.dateInput = React.createRef();
+    this.selectInput = React.createRef();
     this.fileInput = React.createRef();
     this.form = React.createRef();
 
@@ -58,6 +62,7 @@ export class Form extends Component<Props, Istate> {
     const dataForNewCard = {
       text: this.textInput.current?.value,
       date: this.dateInput.current?.value,
+      sex: this.selectInput.current?.value,
       file: this.fileInput.current?.files
         ? URL.createObjectURL(this.fileInput.current.files[0])
         : "",
@@ -92,22 +97,32 @@ export class Form extends Component<Props, Istate> {
           onSubmit={this.handleSubmit}
         >
           <label>
-            Text:
+            Person name:
             <input
               type="text"
               ref={this.textInput}
-              /*  defaultValue="Bob Marchinsky" исправить валидацию на 2 слова*/
               required
-              pattern="[a-zA-Z]+"
-              title="Имя должно содержать буквы"
+              pattern="^[a-zA-Zа-яА-Я]{2,50}[\s][a-zA-Zа-яА-Я]{2,50}$"
+              title="The name must contain 2 words longer than 2 letters"
             />
           </label>
           <label>
-            Date:
+            Birthday:
             <input type="date" ref={this.dateInput} required />
           </label>
+          {/* <label htmlFor="sex">
+            Choose a sex:
+            <select name="sex" required ref={this.selectInput}>
+              <option selected disabled value="">
+                -- Do not chosen --
+              </option>
+              <option value="Man">Man</option>
+              <option value="Woman">Woman</option>
+              <option value="Another">Another</option>
+            </select>
+          </label> */}
           <label>
-            Upload image:
+            Upload avatar:
             <input
               type="file"
               ref={this.fileInput}
@@ -125,10 +140,9 @@ export class Form extends Component<Props, Istate> {
   }
 }
 
-/* text input
-date input
-dropdown/select
+/* 
+date add validation
+dropdown/select add то что нельзя не выбрать значение
 checkbox
 switcher (radio)
-file upload (image)
  */

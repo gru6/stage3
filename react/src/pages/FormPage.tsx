@@ -29,8 +29,9 @@ export default class FormPage extends React.Component<
           {this.state.cards.map((card, index) => (
             <div key={index} className="new-card">
               New Card
-              <div>Card name: {card.text}</div>
-              <div>Date: {card.date}</div>
+              <div>Person name: {card.text}</div>
+              <div>Birthday: {card.date}</div>
+              {/* <div>Sex: {card.sex}</div> */}
               <div className="img-ccontainer">
                 Avatar: <img src={card.file} alt="" className="new-card-img" />
               </div>
