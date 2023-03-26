@@ -1,8 +1,43 @@
-import { Form } from "../components/form/Form";
-export default function FormPage() {
-  return (
-    <>
-      <Form />
-    </>
-  );
+import React from "react";
+import { Form, Icards } from "../components/form/Form";
+
+export interface Istate {
+  cards: Icards[];
+}
+
+export default class FormPage extends React.Component<
+  Record<string, never>,
+  Istate
+> {
+  constructor(props: Record<string, never>) {
+    super(props);
+    this.state = { cards: [] };
+    this.updateStateFormComponent = this.updateStateFormComponent.bind(this);
+  }
+
+  updateStateFormComponent(value: Icards) {
+    this.setState((prevState) => ({
+      cards: [...prevState.cards, value],
+    }));
+  }
+
+  render() {
+    return (
+      <>
+        <Form updateData={this.updateStateFormComponent} />
+        <ul className="new-card-container">
+          {this.state.cards.map((card, index) => (
+            <div key={index} className="new-card">
+              New Card
+              <div>Card name: {card.text}</div>
+              <div>Date: {card.date}</div>
+              <div className="img-ccontainer">
+                Avatar: <img src={card.file} alt="" className="new-card-img" />
+              </div>
+            </div>
+          ))}
+        </ul>
+      </>
+    );
+  }
 }

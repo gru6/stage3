@@ -1,27 +1,40 @@
 import React, { Component, FormEvent, RefObject } from "react";
 import Modal from "./Modal";
 
-export interface InewCard {
+type Props = {
+  updateData: (data: Icards) => void;
+};
+
+export interface Icards {
   text: string | undefined;
   date: string | undefined;
-  file?: string | undefined;
-  isModalOpen?: boolean | undefined;
+  file: string | undefined;
 }
 
-const dataForCards: InewCard[] = [];
+export interface Istate {
+  cards: Icards[];
+  card: Icards;
+  isModalOpen: boolean | undefined;
+}
 
-export class Form extends Component<Record<string, never>, InewCard> {
-  private textInput: RefObject<HTMLInputElement> = React.createRef();
-  private dateInput: RefObject<HTMLInputElement> = React.createRef();
-  private fileInput: RefObject<HTMLInputElement> = React.createRef();
+export class Form extends Component<Props, Istate> {
+  private textInput: RefObject<HTMLInputElement>;
+  private dateInput: RefObject<HTMLInputElement>;
+  private fileInput: RefObject<HTMLInputElement>;
+  private form: RefObject<HTMLFormElement>;
 
-  constructor(props: Record<string, never>) {
+  constructor(props: Props) {
     super(props);
 
-    this.state = { text: "1", date: "1", file: "1", isModalOpen: false };
+    this.state = {
+      cards: [],
+      card: { text: "", date: "", file: "" },
+      isModalOpen: false,
+    };
     this.textInput = React.createRef();
     this.dateInput = React.createRef();
     this.fileInput = React.createRef();
+    this.form = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -29,17 +42,9 @@ export class Form extends Component<Record<string, never>, InewCard> {
   }
 
   handleOpenModal() {
-    this.setState(
-      {
-        text: this.textInput.current?.value,
-        date: this.dateInput.current?.value,
-        file: this.fileInput.current?.files
-          ? URL.createObjectURL(this.fileInput.current.files[0])
-          : "",
-        isModalOpen: true,
-      },
-      () => dataForCards.push(this.state)
-    );
+    this.setState({
+      isModalOpen: true,
+    });
   }
 
   handleCloseModal() {
@@ -49,34 +54,37 @@ export class Form extends Component<Record<string, never>, InewCard> {
   handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const dataForNewCard = {
+      text: this.textInput.current?.value,
+      date: this.dateInput.current?.value,
+      file: this.fileInput.current?.files
+        ? URL.createObjectURL(this.fileInput.current.files[0])
+        : "",
+    };
+
+    this.setState(
+      {
+        card: dataForNewCard,
+      },
+      () => this.handleDataForCard(dataForNewCard)
+    );
+
     this.handleOpenModal();
   }
 
-  createNewCard() {
-    return (
-      <>
-        <div>
-          {dataForCards
-            .map((card, index) => (
-              <div key={index}>
-                <div>{card.text}</div>
-                <div>{card.date}</div>
-                <img src={card.file} alt="" className="new-card-img" />
-              </div>
-            ))
-            .slice(1)}
-        </div>
-      </>
-    );
+  handleDataForCard(data: Icards) {
+    this.props.updateData(data);
   }
 
   render(): JSX.Element {
     const { isModalOpen } = this.state;
-    console.log("this.state :>> ", this.state);
-    console.log("before dataForCards :>> ", dataForCards);
     return (
       <>
-        <form className="form-container" onSubmit={this.handleSubmit}>
+        <form
+          ref={this.form}
+          className="form-container"
+          onSubmit={this.handleSubmit}
+        >
           <label>
             Text:
             <input
@@ -106,7 +114,6 @@ export class Form extends Component<Record<string, never>, InewCard> {
         </form>
 
         <Modal isOpen={isModalOpen} onClose={this.handleCloseModal}></Modal>
-        {this.createNewCard()}
       </>
     );
   }

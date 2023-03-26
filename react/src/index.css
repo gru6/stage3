@@ -130,6 +130,22 @@ input:valid {
   border: 2px solid black;
 }
 
+.new-card-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr ;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.new-card{
+  width: 200px;
+}
+
+.img-ccontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .new-card-img{
   width: 100px;
   height: 100px;
