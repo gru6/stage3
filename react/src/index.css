@@ -206,3 +206,17 @@ input:valid {
   width: 10px;
   height: 10px;
 }
+
+.radio-container{
+  margin-bottom: 20px;
+}
+
+.radio-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.radio-item > label{
+  display: flex;
+  flex-direction: column;
+}

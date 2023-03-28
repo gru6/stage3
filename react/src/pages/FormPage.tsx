@@ -31,7 +31,9 @@ export default class FormPage extends React.Component<
               New Card
               <div>Person name: {card.text}</div>
               <div>Birthday: {card.date}</div>
-              {/* <div>Sex: {card.sex}</div> */}
+              <div>Sex: {card.sex}</div>
+              <div>Client agree with everything</div>
+              <div>Contact: {card.contact}</div>
               <div className="img-ccontainer">
                 Avatar: <img src={card.file} alt="" className="new-card-img" />
               </div>

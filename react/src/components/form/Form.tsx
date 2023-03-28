@@ -8,7 +8,9 @@ type Props = {
 export interface Icards {
   text: string | undefined;
   date: string | undefined;
-  sex?: string | undefined;
+  sex: string | undefined;
+  box: string | undefined;
+  contact: string | undefined;
   file: string | undefined;
 }
 
@@ -21,8 +23,10 @@ export interface Istate {
 export class Form extends Component<Props, Istate> {
   private textInput: RefObject<HTMLInputElement>;
   private dateInput: RefObject<HTMLInputElement>;
-  private fileInput: RefObject<HTMLInputElement>;
   private selectInput: RefObject<HTMLSelectElement>;
+  private boxInput: RefObject<HTMLInputElement>;
+  private contactInput: RefObject<HTMLInputElement>;
+  private fileInput: RefObject<HTMLInputElement>;
   private form: RefObject<HTMLFormElement>;
 
   constructor(props: Props) {
@@ -30,13 +34,15 @@ export class Form extends Component<Props, Istate> {
 
     this.state = {
       cards: [],
-      card: { text: "", date: "", /* sex: "", */ file: "" },
+      card: { text: "", date: "", sex: "", box: "", contact: "", file: "" },
       isModalOpen: false,
     };
 
     this.textInput = React.createRef();
     this.dateInput = React.createRef();
     this.selectInput = React.createRef();
+    this.boxInput = React.createRef();
+    this.contactInput = React.createRef();
     this.fileInput = React.createRef();
     this.form = React.createRef();
 
@@ -63,10 +69,13 @@ export class Form extends Component<Props, Istate> {
       text: this.textInput.current?.value,
       date: this.dateInput.current?.value,
       sex: this.selectInput.current?.value,
+      box: this.boxInput.current?.value,
+      contact: this.contactInput.current?.value,
       file: this.fileInput.current?.files
         ? URL.createObjectURL(this.fileInput.current.files[0])
         : "",
     };
+    console.log("dataForNewCard :>> ", dataForNewCard);
 
     this.setState(
       {
@@ -110,17 +119,64 @@ export class Form extends Component<Props, Istate> {
             Birthday:
             <input type="date" ref={this.dateInput} required />
           </label>
-          {/* <label htmlFor="sex">
+          <label htmlFor="sex">
             Choose a sex:
-            <select name="sex" required ref={this.selectInput}>
-              <option selected disabled value="">
+            <select name="sex" required ref={this.selectInput} defaultValue="">
+              <option disabled value="">
                 -- Do not chosen --
               </option>
               <option value="Man">Man</option>
               <option value="Woman">Woman</option>
               <option value="Another">Another</option>
             </select>
-          </label> */}
+          </label>
+          <label htmlFor="agreement">
+            I agree
+            <input
+              ref={this.boxInput}
+              type="checkbox"
+              name="agreement"
+              value="agreed"
+              required
+            />
+          </label>
+          <div className="radio-container">
+            <p>Please select your preferred contact method:</p>
+            <div className="radio-item">
+              <label htmlFor="contactChoice1">
+                Email
+                <input
+                  ref={this.contactInput}
+                  required
+                  type="radio"
+                  id="contactChoice1"
+                  name="contact"
+                  value="email"
+                />
+              </label>
+              <label htmlFor="contactChoice2">
+                Phone
+                <input
+                  ref={this.contactInput}
+                  type="radio"
+                  id="contactChoice2"
+                  name="contact"
+                  value="phone"
+                />
+              </label>
+              <label htmlFor="contactChoice3">
+                Telegram
+                <input
+                  ref={this.contactInput}
+                  type="radio"
+                  id="contactChoice3"
+                  name="contact"
+                  value="telegram"
+                />
+              </label>
+            </div>
+          </div>
+
           <label>
             Upload avatar:
             <input
@@ -141,8 +197,8 @@ export class Form extends Component<Props, Istate> {
 }
 
 /* 
-date add validation
-dropdown/select add то что нельзя не выбрать значение
-checkbox
+
+
+
 switcher (radio)
  */
