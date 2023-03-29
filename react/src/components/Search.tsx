@@ -1,48 +1,29 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 
-type SearchState = {
-  InputValue: string;
-};
+export default function SearchBar() {
+  const storedInput = localStorage.getItem("input");
+  const [InputValue, setInputValue] = useState(
+    storedInput !== null ? storedInput : ""
+  );
 
-export default class SearchBar extends React.Component<
-  Record<string, never>,
-  SearchState
-> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = { InputValue: "" };
-    this.handleInputChange = this.handleInputChange.bind(this);
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    setInputValue(event.target.value);
   }
 
-  handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    this.setState({ InputValue: event.target.value });
-  }
-
-  componentDidMount() {
+  useEffect(() => {
+    localStorage.setItem("input", InputValue);
     if (localStorage.getItem("input"))
-      this.setState({
-        InputValue: JSON.parse(JSON.stringify(localStorage.getItem("input"))),
-      });
-  }
+      setInputValue(JSON.parse(JSON.stringify(localStorage.getItem("input"))));
+  }, [InputValue]);
 
-  componentWillUnmount(): void {
-    localStorage.setItem("input", this.state.InputValue);
-  }
-
-  render() {
-    return (
-      <>
-        <form id="search-form" role="search">
-          <div>
-            <input
-              defaultValue={this.state.InputValue}
-              type="text"
-              onChange={this.handleInputChange}
-            />
-          </div>
-        </form>
-        <button>Search</button>
-      </>
-    );
-  }
+  return (
+    <>
+      <form id="search-form" role="search">
+        <div>
+          <input value={InputValue} type="text" onChange={handleInputChange} />
+        </div>
+      </form>
+      <button>Search</button>
+    </>
+  );
 }
