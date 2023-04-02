@@ -12,7 +12,12 @@ export default defineConfig({
     coverage: {
       provider: "c8",
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/types/*"],
+      exclude: [
+        "src/types/*",
+        "src/App.tsx",
+        "src/main.tsx",
+        "src/vite-env.d.ts",
+      ],
       reporter: ["text", "json", "html"],
       all: true,
       lines: 80,

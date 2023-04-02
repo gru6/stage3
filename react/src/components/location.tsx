@@ -1,11 +1,12 @@
-import { WithRouterProps, withRouter } from "./WithRouterHoc";
+import { useLocation } from "react-router-dom";
+import React from "react";
 
 interface LocationComponentProps {
   location: string;
 }
-type Props = LocationComponentProps & WithRouterProps;
-const LocationComponent: React.FC<Props> = () => {
-  switch (location.pathname) {
+type PropsLocation = LocationComponentProps;
+const LocationComponent: React.FC<PropsLocation> = ({ location }) => {
+  switch (location) {
     case "/":
       return <h1>Current page: Home</h1>;
     case "/form":
@@ -16,5 +17,10 @@ const LocationComponent: React.FC<Props> = () => {
       return <h1>Current page: Oooops</h1>;
   }
 };
-const RouterLocation = withRouter(LocationComponent);
+
+const RouterLocation = () => {
+  const location = useLocation().pathname;
+  return <LocationComponent location={location} />;
+};
+
 export default RouterLocation;
