@@ -22,8 +22,8 @@ export default function SearchBar() {
         <div>
           <input value={InputValue} type="text" onChange={handleInputChange} />
         </div>
+        <button>Search</button>
       </form>
-      <button>Search</button>
     </>
   );
 }
