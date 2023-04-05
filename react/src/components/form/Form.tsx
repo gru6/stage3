@@ -59,6 +59,7 @@ export function Form(props: Props) {
   function handleDataForCard(data: Icards) {
     props.updateData(data);
   }
+  const element = <div>Форма отправлена!</div>;
 
   return (
     <>
@@ -148,7 +149,11 @@ export function Form(props: Props) {
         <button>Submit</button>
       </form>
 
-      <Modal isOpen={isModalOpen} onClose={() => handleCloseModal()}></Modal>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => handleCloseModal()}
+        InnerComponent={element}
+      ></Modal>
     </>
   );
 }
