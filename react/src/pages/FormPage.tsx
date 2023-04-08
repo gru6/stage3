@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Icards } from "../components/form/Form";
+import { Form, Icards } from "../components/Form/Form";
 
 export interface Istate {
   cards: Icards[];
@@ -24,7 +24,7 @@ export default function FormPage() {
             <div>Sex: {card.sex}</div>
             <div>Client agree with everything</div>
             <div>Contact: {card.contact}</div>
-            <div className="img-ccontainer">
+            <div className="img-container">
               Avatar: <img src={card.file} alt="" className="new-card-img" />
             </div>
           </div>

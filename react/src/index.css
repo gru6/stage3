@@ -96,9 +96,6 @@ button:focus-visible {
   .cards-container { grid-template-columns: repeat(3, 1fr); }
 }
 
-
-
-
 .card{
   display: block;
   align-items:center;
@@ -165,7 +162,7 @@ input:valid {
   width: 200px;
 }
 
-.img-ccontainer {
+.img-container {
   display: flex;
   flex-direction: column;
   align-items: center;

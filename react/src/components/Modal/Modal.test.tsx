@@ -8,7 +8,7 @@ describe("Modal component", () => {
   it("renders when isOpen is true", () => {
     const handleClose = vi.fn();
     const { getByText, getByAltText } = render(
-      <Modal isOpen={true} onClose={handleClose} />
+      <Modal isOpen={true} onClose={handleClose} InnerComponent={undefined} />
     );
 
     expect(getByText("Форма отправлена!")).toBeInTheDocument();
@@ -19,7 +19,9 @@ describe("Modal component", () => {
   });
 
   it("does not render when isOpen is false", () => {
-    const { container } = render(<Modal isOpen={false} onClose={vi.fn()} />);
+    const { container } = render(
+      <Modal isOpen={false} onClose={vi.fn()} InnerComponent={undefined} />
+    );
     expect(container.firstChild).toBeNull();
   });
 });
