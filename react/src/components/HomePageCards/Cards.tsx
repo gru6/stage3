@@ -51,6 +51,7 @@ export const CreateCards: React.FC = () => {
   } else if (!isLoaded) {
     return (
       <div className="loading-indicator">
+        Loading...
         <div className="spinner"></div>
       </div>
     );

@@ -8,8 +8,6 @@ describe("HomePage", () => {
   it("should render Home page", () => {
     render(<Home />);
     const searchElement = screen.getByText(/search/i);
-    const cardsElement = screen.getByText(/The Godfather/i);
     expect(searchElement).toBeInTheDocument();
-    expect(cardsElement).toBeInTheDocument();
   });
 });

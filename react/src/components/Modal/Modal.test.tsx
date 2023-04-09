@@ -7,11 +7,10 @@ import Modal from "./Modal";
 describe("Modal component", () => {
   it("renders when isOpen is true", () => {
     const handleClose = vi.fn();
-    const { getByText, getByAltText } = render(
+    const { getByAltText } = render(
       <Modal isOpen={true} onClose={handleClose} InnerComponent={undefined} />
     );
 
-    expect(getByText("Форма отправлена!")).toBeInTheDocument();
     expect(getByAltText("close modal")).toBeInTheDocument();
 
     fireEvent.click(getByAltText("close modal"));

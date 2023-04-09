@@ -19,10 +19,10 @@ export const CardDetails: React.FC<CardDetailsProps> = ({ item }) => {
       <div className="card-text">
         <div>Title: {item.title}</div>
         <div>Owner: {item.ownername}</div>
-        <div>Upload: {getDate(item.dateupload)}</div>
-        <div>Last update: {getDate(item.lastupdate)}</div>
+        <div>Upload: {getDate(item.dateupload!)}</div>
+        <div>Last update: {getDate(item.lastupdate!)}</div>
         <div>Format: {item.originalformat}</div>
-        {item.description._content && (
+        {item.description?._content && (
           <div className="card-description">
             `Description: ${item.description._content}`
           </div>
@@ -31,7 +31,7 @@ export const CardDetails: React.FC<CardDetailsProps> = ({ item }) => {
           Original size: {item.width_o} x {item.height_o} px
         </div>
         <div>Tags: {item.tags}</div>
-        <div>views: {(+item.views).toLocaleString("ru-RU")}</div>
+        <div>views: {(+item.views!).toLocaleString("ru-RU")}</div>
       </div>
     </div>
   );

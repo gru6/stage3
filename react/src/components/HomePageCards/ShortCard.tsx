@@ -10,7 +10,7 @@ export default function ShortCard(props: ShortCardProps) {
   const { items, selectedItemId, handleOpenModal } = props;
   return (
     <>
-      <div className="cards-container">
+      <div className="cards-container" id="cards-container">
         {items &&
           items.map((item) => {
             const isSelected = item.id === selectedItemId;
@@ -20,7 +20,7 @@ export default function ShortCard(props: ShortCardProps) {
                 key={item.id}
                 onClick={() => handleOpenModal(item.id)}
               >
-                <div>views: {(+item.views).toLocaleString("ru-RU")}</div>
+                <div>views: {(+item.views!).toLocaleString("ru-RU")}</div>
                 <div>
                   Original size: {item.width_o} x {item.height_o} px
                 </div>

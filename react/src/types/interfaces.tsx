@@ -25,16 +25,16 @@ export interface HomePageCard {
   farm: number;
   server: string;
   secret: string;
-  title: string;
-  description: { _content: string };
-  dateupload: string;
-  lastupdate: string;
-  originalformat: string;
+  title?: string;
+  description?: { _content: string };
+  dateupload?: string;
+  lastupdate?: string;
+  originalformat?: string;
   width_o: number;
   height_o: number;
-  ownername: string;
-  tags: string;
-  views: string;
+  ownername?: string;
+  tags?: string;
+  views?: string;
 }
 
 export interface Error {
