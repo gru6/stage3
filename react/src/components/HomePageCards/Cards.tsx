@@ -55,7 +55,7 @@ export const CreateCards: React.FC = () => {
         <div className="spinner"></div>
       </div>
     );
-  } else {
+  } else if (items.length > 0) {
     return (
       <>
         <ShortCard
@@ -77,5 +77,7 @@ export const CreateCards: React.FC = () => {
         ></Modal>
       </>
     );
+  } else {
+    return <div>Какой-то странный запрос, попробуй еще раз...</div>;
   }
 };

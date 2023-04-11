@@ -15,6 +15,8 @@ export default defineConfig({
       exclude: [
         "src/types/*",
         "src/App.tsx",
+        "src/components/Form/Form.test.tsx",
+        "src/components/HomePageCards/ShortCard.test.tsx",
         "src/main.tsx",
         "src/vite-env.d.ts",
       ],
