@@ -1,28 +1,34 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { setSearchValue } from "../features/counter/searchSlice";
+import { FormEvent, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "store";
 
 export default function SearchBar() {
-  const storedInput = localStorage.getItem("input");
-  const [InputValue, setInputValue] = useState(
-    storedInput !== null ? storedInput : ""
-  );
+  const [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
+  const searchValue = useSelector((state: RootState) => state.search.value);
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setInputValue(event.target.value);
-  }
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    setInputValue(inputValue);
+  };
 
-  useEffect(() => {
-    localStorage.setItem("input", InputValue);
-    if (localStorage.getItem("input"))
-      setInputValue(JSON.parse(JSON.stringify(localStorage.getItem("input"))));
-  }, [InputValue]);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(setSearchValue(inputValue));
+  };
 
   return (
     <>
-      <form id="search-form" role="search">
+      <form id="search-form" role="search" onSubmit={handleSubmit}>
         <div>
-          <input value={InputValue} type="text" onChange={handleInputChange} />
+          <input
+            defaultValue={searchValue}
+            type="text"
+            onChange={handleInputChange}
+          />
         </div>
-        <button>Search</button>
+        <button type="submit">Search</button>
       </form>
     </>
   );

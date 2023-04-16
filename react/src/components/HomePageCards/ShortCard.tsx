@@ -1,6 +1,6 @@
 import { HomePageCard } from "types/interfaces";
 
-interface ShortCardProps {
+export interface ShortCardProps {
   items: HomePageCard[];
   selectedItemId: string | null;
   handleOpenModal: (itemId: string) => void;
