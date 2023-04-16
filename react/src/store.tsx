@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./features/counter/counterSlice";
-import searchReducer from "./features/counter/searchSlice";
+import searchReducer from "./features/searchSlice";
+import formReducer from "./features/formSubmitSlice";
 import { apiSlice } from "./features/apiSlice";
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -8,8 +8,8 @@ export type AppDispatch = typeof store.dispatch;
 
 const store = configureStore({
   reducer: {
-    counter: counterReducer,
     search: searchReducer,
+    form: formReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

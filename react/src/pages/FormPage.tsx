@@ -1,22 +1,21 @@
-import React, { useState } from "react";
 import { Form, Icards } from "../components/Form/Form";
-
-export interface Istate {
-  cards: Icards[];
-}
+import { useDispatch, useSelector } from "react-redux";
+import { addFormValue } from "../features/formSubmitSlice";
+import { RootState } from "store";
 
 export default function FormPage() {
-  const [cards, setCards] = useState<Icards[]>([]);
+  const dispatch = useDispatch();
+  const formValues = useSelector((state: RootState) => state.form.formValues);
 
   const updateStateFormComponent = (value: Icards) => {
-    setCards([...cards, value]);
+    dispatch(addFormValue(value));
   };
 
   return (
     <>
       <Form updateData={updateStateFormComponent} />
       <ul className="new-card-container">
-        {cards.map((card, index) => (
+        {formValues.map((card, index) => (
           <div key={index} className="new-card">
             New Card
             <div>Person name: {card.text}</div>

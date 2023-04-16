@@ -1,5 +1,5 @@
-import { setSearchValue } from "../features/counter/searchSlice";
-import { FormEvent, useState } from "react";
+import { setSearchValue } from "../features/searchSlice";
+import { FormEvent, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store";
 
@@ -12,6 +12,10 @@ export default function SearchBar() {
     const inputValue = event.target.value;
     setInputValue(inputValue);
   };
+
+  useEffect(() => {
+    setInputValue(inputValue);
+  }, [inputValue]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

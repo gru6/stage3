@@ -3,22 +3,20 @@ import Modal from "../Modal/Modal";
 import "./Cards.css";
 import { CardDetails } from "./CardDetails";
 import ShortCard from "./ShortCard";
-import { Counter } from "../../features/counter/Counter";
 
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 
 import { useGetCardsQuery } from "../../features/apiSlice";
 import { HomePageCard } from "types/interfaces";
+
 export const CreateCards: React.FC = () => {
   const [isModalOpen, setModalStatus] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
-
   const { value: searchValue } = useSelector(
     (state: RootState) => state.search
   );
   const { data, isLoading, error } = useGetCardsQuery(searchValue);
-
   const { photo = [] } = data?.photos || {};
 
   const handleOpenModal = (itemId: string) => {
@@ -52,32 +50,31 @@ export const CreateCards: React.FC = () => {
         <div className="spinner"></div>
       </div>
     );
-  }
+  } else if (photo.length > 0) {
+    return (
+      <>
+        <ShortCard
+          items={photo}
+          selectedItemId={selectedItemId}
+          handleOpenModal={handleOpenModal}
+        />
 
-  return photo.length > 0 ? (
-    <>
-      <Counter />
-      <ShortCard
-        items={photo}
-        selectedItemId={selectedItemId}
-        handleOpenModal={handleOpenModal}
-      />
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        InnerComponent={
-          selectedItemId ? (
-            <CardDetails
-              item={
-                photo.find((item: HomePageCard) => item.id === selectedItemId)!
-              }
-            />
-          ) : null
-        }
-      ></Modal>
-    </>
-  ) : (
-    <div>Какой-то странный запрос, попробуй еще раз...</div>
-  );
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          InnerComponent={
+            selectedItemId ? (
+              <CardDetails
+                item={
+                  photo.find(
+                    (item: HomePageCard) => item.id === selectedItemId
+                  )!
+                }
+              />
+            ) : null
+          }
+        ></Modal>
+      </>
+    );
+  } else return <div>Какой-то странный запрос, попробуй еще раз...</div>;
 };
