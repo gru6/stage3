@@ -18,6 +18,8 @@ export default defineConfig({
         "src/components/Form/Form.test.tsx",
         "src/components/HomePageCards/ShortCard.test.tsx",
         "src/main.tsx",
+        "src/hooks.tsx",
+        "src/features/*",
         "src/vite-env.d.ts",
       ],
       reporter: ["text", "json", "html"],
