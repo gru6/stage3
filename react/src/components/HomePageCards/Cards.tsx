@@ -16,7 +16,7 @@ export const CreateCards: React.FC = () => {
   const { value: searchValue } = useSelector(
     (state: RootState) => state.search
   );
-  const { data, isLoading, error } = useGetCardsQuery(searchValue);
+  const { data, isFetching, error } = useGetCardsQuery(searchValue);
   const { photo = [] } = data?.photos || {};
 
   const handleOpenModal = (itemId: string) => {
@@ -43,7 +43,7 @@ export const CreateCards: React.FC = () => {
     }
   }
 
-  if (isLoading) {
+  if (isFetching) {
     return (
       <div className="loading-indicator">
         Loading...
