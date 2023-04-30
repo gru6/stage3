@@ -1,34 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+import Home from "./pages/Homepage";
+import ErrorPage from "./pages/Errorpage";
+import About from "./pages/Aboutpage";
+import RouterLocation from "./components/location";
+import FormPage from "./pages/FormPage";
+
+/* interface AppProps {
+  url: string;
+} */
+
+export class App extends React.Component /* <AppProps> */ {
+  render() {
+    return (
+      <Router>
+        <header className="header">
+          <NavLink to={`/`}>Home</NavLink>
+          <NavLink to={`/form`}>Form</NavLink>
+          <NavLink to={`/about`}>About Us</NavLink>
+          <Route>
+            <RouterLocation />
+          </Route>
+        </header>
+
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/form" element={<FormPage />}></Route>
+          <Route path="*" element={<ErrorPage />}></Route>
+        </Routes>
+      </Router>
+    );
+  }
 }
-
-export default App
